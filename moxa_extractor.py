@@ -46,11 +46,11 @@ with open(args.file, 'rb') as f:
         last_offset = max(last_offset, entry['size'] + entry['offset'])
         # extract each file
         f.seek(entry['offset'])
-        with open('out/' + entry['filename'].decode('ascii'), 'w+b') as outfile:
+        with open(os.path.join(args.output-dir, entry['filename'].decode('ascii')), 'w+b') as outfile:
             outfile.write(f.read(entry['size']))
 
     # extract machine code
-    with open('out/firmware.bin', 'w+b') as outfile:
+    with open(os.path.join(args.output-dir, 'firmware.bin'), 'w+b') as outfile:
         # files are padded so that they always start at multiples of 16
         f.seek(last_offset + 16 - (last_offset % 16))
         outfile.write(f.read())
