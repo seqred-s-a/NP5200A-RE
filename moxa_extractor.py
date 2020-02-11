@@ -37,7 +37,7 @@ with open(args.file, 'rb') as f:
         files.append(tmp)
 
     try:
-        os.mkdir('out')
+        os.mkdir(args.output-dir)
     except FileExistsError:
         pass
 
